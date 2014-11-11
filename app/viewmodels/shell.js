@@ -29,7 +29,7 @@
                 ctor.username(currentUser.attributes.username);
                 ctor.user = currentUser;
             }
-            
+
             return router.activate();
         },
         logout: function(){
