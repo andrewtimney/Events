@@ -1,8 +1,8 @@
 ﻿define(['plugins/router', 'durandal/app', 'data/user', 'knockout'], function (router, app, user, ko) {
     var ctor =  {
         router: router,
-        hasUser: ko.observable(false),
-        username: ko.observable(),
+        hasUser: user.loggedIn,
+        username: user.username,
         user: null,
         activate: function () {
             router.map([
@@ -25,7 +25,6 @@
 
             var currentUser = user.current();
             if(currentUser != null){
-                ctor.hasUser(true);
                 ctor.username(currentUser.attributes.username);
                 ctor.user = currentUser;
             }
