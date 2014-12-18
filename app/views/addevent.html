@@ -1,7 +1,7 @@
 <section>
     <h3>Add Event</h3>
 
-    <form action="" class="form-horizontal" data-bind="submit: save">
+    <form action="" class="form-horizontal" data-bind="submit: save" novalidate>
         <div class="form-group">
             <label class="control-label col-sm-2" for="Title">Title</label>
             <div class="col-sm-4">
@@ -11,7 +11,7 @@
         <div class="form-group">
             <label class="control-label col-sm-2" for="Date">Date</label>
             <div class="col-sm-4">
-                <input type="date" name="Date" class="form-control" required data-bind="value: date" />
+                <input type="text" name="Date" class="form-control" required data-bind="value: date" />
             </div>
 
         </div>

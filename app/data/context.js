@@ -1,7 +1,9 @@
-define(['data/user', 'data/event'], function(user, event){
+define(['data/user', 'data/event', 'data/tag'],
+    function(user, event, tag){
 
-    return{
-        user: user,
-        event: event
-    };
-})
+        return{
+            user: user,
+            event: event,
+            tag: tag
+        };
+    });

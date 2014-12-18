@@ -1,0 +1,20 @@
+<div class="panel panel-default" style="width:400px;">
+    <div class="panel-heading">
+       <h4>Add Tag</h4>
+    </div>
+    <div class="panel-body">
+        <form class="" data-bind="submit: submit" novalidate>
+            <div class="form-group">
+                <label class="control-label" for="Name">Name</label>
+                    <input type="text" name="Name" id="Name"
+                           data-bind="value: name"
+                           class="form-control" required/>
+            </div>
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary" value="Save"/>
+                <input type="button" class="btn btn-default" value="Cancel"
+                       data-bind="click: cancel"/>
+            </div>
+        </form>
+    </div>
+</div>

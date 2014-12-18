@@ -1,23 +1,47 @@
 <section>
     <br/>
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            My Events <button class="btn btn-xs btn-primary pull-right" data-bind="click: addEvent">
-            <i class="fa fa-plus"></i> New Event</button>
-        </div>
-        <div class="panel-body">
+    <div class="row">
 
-            <ul data-bind="foreach: events" class="media-list">
-                <li class="media">
-                    <a class="pull-left" href="#">
-                        <img class="media-object" src="" alt="" width="64" data-bind="attr: { src: $data.get('photo')}">
+        <div class="col-sm-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Tags
+                    <a href="#" class="pull-right btn btn-primary btn-xs" data-bind="click: addTag">
+                        <i class="fa fa-plus"></i> Tag
                     </a>
-                    <div class="media-body">
-                        <h4 class="media-heading" data-bind="text: $data.get('title')"></h4>
-                        <span data-bind="text: $data.get('location')"></span>
+                </div>
+                <div class="panel-body">
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-10">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    My Events <button class="btn btn-xs btn-primary pull-right" data-bind="click: addEvent">
+                    <i class="fa fa-plus"></i> New Event</button>
+                </div>
+                <div class="panel-body">
+
+                    <div data-bind="foreach: events" class="media-list" >
+                        <div class="media eventItem" style="width:300px; display: inline-block">
+                            <a class="pull-left" href="#">
+                                <img class="media-object" src="" alt="" width="64" data-bind="attr: { src: $data.get('photo')}">
+                            </a>
+                            <div class="media-body">
+                                <h4 class="media-heading" >
+                                    <a href="#" data-bind="text: $data.get('title'), attr: { href: '#edit/'+$data.id }"></a>
+                                </h4>
+                                <span data-bind="text: $data.get('location')"></span>
+                                <a href="#" class="btn btn-default btn-sm pull-right"
+                                   data-bind="click: $root.deleteEvent.bind($root)">
+                                    <i class="fa fa-times"></i></a>
+                            </div>
+                        </div>
                     </div>
-                </li>
-            </ul>
+                </div>
+            </div>
         </div>
     </div>
 </section>

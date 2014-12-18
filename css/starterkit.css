@@ -50,3 +50,14 @@ section {
 .pictureDetail {
     max-width: 425px;
 }
+
+.validationMessage{
+    padding:3px;
+    background-color: #ff8177;
+}
+
+.eventItem{
+    padding:3px;
+    border:1px solid #eee;
+    height:72px;
+}

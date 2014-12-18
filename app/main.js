@@ -6,17 +6,23 @@
         'transitions' : '../lib/durandal/js/transitions',
         'knockout': '../lib/knockout/knockout-3.1.0',
         'bootstrap': '../lib/bootstrap/js/bootstrap',
-        'jquery': '../lib/jquery/jquery-1.9.1'
+        'jquery': '../lib/jquery/jquery-1.9.1',
+        'knockout-validation': '../lib/knockout/knockout.validation'
     },
     shim: {
         'bootstrap': {
             deps: ['jquery'],
             exports: 'jQuery'
-       }
+       },
+        'knockout-validation':{
+            deps: ['knockout'],
+            exports: 'ko'
+        }
     }
 });
 
-define(['durandal/system', 'durandal/app', 'durandal/viewLocator'],  function (system, app, viewLocator) {
+define(['durandal/system', 'durandal/app', 'durandal/viewLocator', 'knockout-validation', 'knockout'],
+    function (system, app, viewLocator, knockoutValidation, ko) {
     //>>excludeStart("build", true);
     system.debug(true);
     //>>excludeEnd("build");
@@ -27,6 +33,15 @@ define(['durandal/system', 'durandal/app', 'durandal/viewLocator'],  function (s
         router:true,
         dialog: true
     });
+
+    ko.validation.rules['date'] = {
+        validator: function (val) {
+            return moment(val, 'DD/MM/YYYY').isValid()
+        },
+        message: 'A valid date is required (dd/mm/yyyy)'
+    };
+
+    ko.validation.registerExtenders();
 
     app.start().then(function() {
         //Replace 'viewmodels' in the moduleId with 'views' to locate the view.

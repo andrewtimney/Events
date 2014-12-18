@@ -3,16 +3,28 @@ define(['knockout', 'data/context', 'durandal/app', 'plugins/router'],
 
         var ctor = {
             displayName:'Login',
-            username: ko.observable(),
-            password: ko.observable(),
+            username: ko.observable().extend({
+                required: {
+                    message: 'Username is required',
+                    params: true
+                } }),
+            password: ko.observable().extend({
+                required: {
+                    message: 'Password is required',
+                    params: true
+                } }),
             login: function(){
-                datacontext.user.login(this.username(), this.password())
-                    .then(function(user){
-                        router.navigate('Homess');
-                    }, function(user, error){
-                        app.trigger('app:error', 'Error Occurred', error.message);
-                    });
+                this.errors.showAllMessages();
+                if(this.isValid()){
+                    datacontext.user.login(this.username(), this.password())
+                        .then(function(user){
+                            router.navigate('Home');
+                        }, function(user, error){
+                            app.trigger('app:error', 'Error Occurred', error.message);
+                        });
+                }
             }
         };
+        ctor.errors = ko.validation.group(ctor);
         return ctor;
 })
