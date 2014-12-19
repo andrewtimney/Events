@@ -5,13 +5,13 @@
         <div class="form-group">
             <label class="control-label col-sm-2" for="Title">Title</label>
             <div class="col-sm-4">
-                <input type="text" name="Title" class="form-control" required data-bind="value: title" />
+                <input type="text" name="Title" id="Title" class="form-control" required data-bind="value: title" />
             </div>
         </div>
         <div class="form-group">
             <label class="control-label col-sm-2" for="Date">Date</label>
             <div class="col-sm-4">
-                <input type="text" name="Date" class="form-control" required data-bind="value: date" />
+                <input type="text" name="Date" id="Date" class="form-control" required data-bind="value: date" />
             </div>
 
         </div>
@@ -28,19 +28,20 @@
         <div class="form-group">
             <label class="control-label col-sm-2" for="Location">Location</label>
             <div class="col-sm-4">
-                <input type="text" name="Location" class="form-control" name="Location" required data-bind="value: location"/>
+                <input type="text" id="Location" class="form-control" name="Location" required data-bind="value: location"/>
             </div>
         </div>
         <div class="form-group">
             <label class="control-label col-sm-2" for="Photo">Photo</label>
             <div class="col-sm-4">
-                <input type="text" name="Photo" class="form-control" name="Photo" required data-bind="value: photo"/>
+                <input type="text" id="Photo" class="form-control" name="Photo" required data-bind="value: photo"/>
             </div>
         </div>
 
         <div class="form-group">
             <div class="col-sm-2 col-sm-offset-2">
                 <input type="submit" class="btn btn-primary"/>
+                <input type="button" class="btn btn-default" data-bind="click: cancel" value="Cancel"/>
             </div>
         </div>
     </form>

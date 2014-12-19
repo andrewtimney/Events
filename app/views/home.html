@@ -11,7 +11,12 @@
                     </a>
                 </div>
                 <div class="panel-body">
-
+                    <div data-bind="foreach: tags" class="tags">
+                        <span class="label label-default" >
+                            <span data-bind="text: $data.get('name')"></span>
+                            <i class="fa fa-times"></i>
+                        </span>
+                    </div>
                 </div>
             </div>
         </div>

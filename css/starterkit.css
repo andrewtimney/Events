@@ -61,3 +61,7 @@ section {
     border:1px solid #eee;
     height:72px;
 }
+
+.tags .label{
+    margin:2px;
+}

@@ -1,27 +1,29 @@
 define(['knockout', 'plugins/dialog', 'data/context', 'durandal/app'],
-    function(ko, dialog, datacontext, app){
+    function (ko, dialog, datacontext, app) {
 
         var ctor = {
             name: ko.observable().extend({
-              required:{
-                  message: 'Name is required',
-                  params: true
-              }
+                required: {
+                    message: 'Name is required',
+                    params: true
+                }
             }),
-            submit: function(){
+            submit: function () {
                 this.errors.showAllMessages();
-                if(this.isValid()){
+                if (this.isValid()) {
                     datacontext.tag.add(this.name())
-                        .then(function(tag){
+                        .then(function (tag) {
                             app.trigger('app:success', 'New Tag', 'Yay, a new tag was added!');
-                        });
+                            app.trigger('app:newTag', tag);
+                            this.cancel();
+                        }.bind(this));
                 }
             },
-            cancel: function(){
+            cancel: function () {
                 dialog.close(this);
                 this.reset();
             },
-            reset: function(){
+            reset: function () {
                 this.name(null);
                 this.errors.showAllMessages(false);
             }

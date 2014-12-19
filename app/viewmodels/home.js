@@ -1,9 +1,10 @@
-define(['knockout', 'data/context', 'plugins/router', 'plugins/dialog', 'viewmodels/addtag'],
-    function(ko, datacontext, router, dialog, addtag){
+define(['knockout', 'data/context', 'plugins/router', 'plugins/dialog', 'viewmodels/addtag', 'durandal/app'],
+    function(ko, datacontext, router, dialog, addtag, app){
         return {
             displayName: 'Home',
             username: ko.observable(),
             events: ko.observableArray(),
+            tags: ko.observableArray(),
             canActivate: function(){
                 var currentUser = datacontext.user.current();
                 if(currentUser != null){
@@ -18,6 +19,15 @@ define(['knockout', 'data/context', 'plugins/router', 'plugins/dialog', 'viewmod
                     .then(function(events){
                         this.events(events);
                     }.bind(this));
+
+                datacontext.tag.getAll()
+                    .then(function(tags){
+                        this.tags(tags);
+                    }.bind(this));
+
+                app.on('app:newTag').then(function(tag){
+                   alert(tag);
+                });
             },
             addEvent: function(){
                 router.navigate('add');

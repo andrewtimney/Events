@@ -38,6 +38,18 @@ define(['knockout', 'data/context', 'durandal/app', 'plugins/router'],
                         app.trigger('app:error', 'Error Occurred', error.message);
                     })
                 }
+            },
+            cancel: function(){
+                this.reset();
+                router.navigate('home');
+            },
+            reset: function(){
+                this.title(null);
+                this.date(null);
+                this.description(null);
+                this.location(null);
+                this.photo(null);
+                this.errors.showAllMessages(false);
             }
         };
         ctor.errors = ko.validation.group(ctor);

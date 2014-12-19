@@ -14,7 +14,15 @@ define(['jquery'], function($){
             event.save(null,{
                 success: deferred.resolve,
                 error: deferred.reject
-            })
+            });
+            return deferred.promise();
+        },
+        edit: function(event){
+            var deferred = $.Deferred();
+            event.save(null, {
+                success: deferred.resolve,
+                error: deferred.reject
+            });
             return deferred.promise();
         },
         getAll: function(){
