@@ -1,9 +1,9 @@
-define(['data/user', 'data/event', 'data/tag'],
-    function(user, event, tag){
+define(['data/user', 'data/event', 'data/category'],
+    function(user, event, category){
 
         return{
             user: user,
             event: event,
-            tag: tag
+            category: category
         };
     });

@@ -2,44 +2,68 @@
     <h3>Add Event</h3>
 
     <form action="" class="form-horizontal" data-bind="submit: save" novalidate>
-        <div class="form-group">
-            <label class="control-label col-sm-2" for="Title">Title</label>
-            <div class="col-sm-4">
-                <input type="text" name="Title" id="Title" class="form-control" required data-bind="value: title" />
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label col-sm-2" for="Date">Date</label>
-            <div class="col-sm-4">
-                <input type="text" name="Date" id="Date" class="form-control" required data-bind="value: date" />
-            </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label class="control-label col-sm-4" for="Title">Title</label>
 
-        </div>
-        <div class="form-group">
-            <label class="control-label col-sm-2" for="Description">Description</label>
-            <div class="col-sm-4">
+                <div class="col-sm-8">
+                    <input type="text" name="Title" id="Title" class="form-control" required data-bind="value: title"/>
+                </div>
+
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-4" for="Date">Date</label>
+
+                <div class="col-sm-8">
+                    <input type="text" name="Date" id="Date" class="form-control" required data-bind="value: date"/>
+                </div>
+
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-4" for="Description">Description</label>
+
+                <div class="col-sm-8">
                 <textarea name="Description" id="Description" cols="30" rows="10" class="form-control" required
-                        data-bind="value: description"></textarea>
-            </div>
-            <div class="col-sm-6">
-                <img src="" alt="" data-bind="attr: { src: photo }" height="200"/>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label col-sm-2" for="Location">Location</label>
-            <div class="col-sm-4">
-                <input type="text" id="Location" class="form-control" name="Location" required data-bind="value: location"/>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label col-sm-2" for="Photo">Photo</label>
-            <div class="col-sm-4">
-                <input type="text" id="Photo" class="form-control" name="Photo" required data-bind="value: photo"/>
-            </div>
-        </div>
+                          data-bind="value: description"></textarea>
+                </div>
 
-        <div class="form-group">
-            <div class="col-sm-2 col-sm-offset-2">
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-4" for="Location">Location</label>
+
+                <div class="col-sm-8">
+                    <input type="text" id="Location" class="form-control" name="Location" required
+                           data-bind="value: location"/>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label class="control-label col-sm-4" for="Category">Category</label>
+                <div class="col-sm-8">
+                    <select name="Category" id="Category" class="form-control"
+                            data-bind="options: categories, optionsText: function(cat){ return cat.get('name'); }, optionsCaption: '', value: selectedCategory">
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-4" for="Photo">Photo</label>
+
+                <div class="col-sm-8">
+                    <input type="text" id="Photo" class="form-control" name="Photo" required data-bind="value: photo"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-8 col-sm-offset-4">
+                    <img src=""
+                         alt="" data-bind="attr: { src: photo }"
+                         height="200" class=""/>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-sm-8 col-sm-offset-2">
+            <div class="pull-left">
                 <input type="submit" class="btn btn-primary"/>
                 <input type="button" class="btn btn-default" data-bind="click: cancel" value="Cancel"/>
             </div>

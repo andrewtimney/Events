@@ -11,10 +11,10 @@ define(['knockout', 'plugins/dialog', 'data/context', 'durandal/app'],
             submit: function () {
                 this.errors.showAllMessages();
                 if (this.isValid()) {
-                    datacontext.tag.add(this.name())
+                    datacontext.category.add(this.name())
                         .then(function (tag) {
-                            app.trigger('app:success', 'New Tag', 'Yay, a new tag was added!');
-                            app.trigger('app:newTag', tag);
+                            app.trigger('app:success', 'New Category', 'Yay, a new Category was added!');
+                            app.trigger('app:newcategory', tag);
                             this.cancel();
                         }.bind(this));
                 }

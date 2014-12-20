@@ -3,11 +3,11 @@ define(['jquery'], function($){
     return {
       add: function(name){
           var deferred = $.Deferred();
-          var Tag = Parse.Object.extend("Tag");
-          var tag = new Tag();
-          tag.set("name", name);
-          tag.setACL(new Parse.ACL(Parse.User.current()));
-          tag.save(null,{
+          var Category = Parse.Object.extend("Category");
+          var category = new Category();
+          category.set("name", name);
+          category.setACL(new Parse.ACL(Parse.User.current()));
+          category.save(null,{
               success: deferred.resolve,
               error: deferred.reject
           })
@@ -15,17 +15,17 @@ define(['jquery'], function($){
       },
         getAll: function(){
             var deferred = $.Deferred();
-            var Tag = Parse.Object.extend("Tag");
-            var query = new Parse.Query(Tag);
+            var Category = Parse.Object.extend("Category");
+            var query = new Parse.Query(Category);
             query.find({
                 success: deferred.resolve,
                 error: deferred.reject
             });
             return deferred.promise();
         },
-        remove: function(tag){
+        remove: function(category){
             var deferred = $.Deferred();
-            tag.destroy({
+            category.destroy({
                 success: deferred.resolve,
                 error: deferred.reject
             });

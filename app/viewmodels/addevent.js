@@ -20,6 +20,18 @@ define(['knockout', 'data/context', 'durandal/app', 'plugins/router'],
                 } }),
             location: ko.observable(),
             photo: ko.observable(),
+            categories: ko.observableArray(),
+            selectedCategory: ko.observableArray().extend({
+                required: {
+                    message: 'Category is required',
+                    params: true
+                } }),
+            activate: function(){
+              datacontext.category.getAll()
+                  .then(function(categories){
+                        this.categories(categories);
+                  }.bind(this));
+            },
             save: function(){
                 this.errors.showAllMessages();
                 if(this.isValid()){
