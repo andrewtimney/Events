@@ -1,7 +1,7 @@
 define(['jquery'], function($){
 
     return {
-        add: function(title, date, desc, location, photo){
+        add: function(title, date, desc, location, photo, category){
             var deferred = $.Deferred();
             var Event = Parse.Object.extend("Event");
             var event = new Event();
@@ -10,6 +10,9 @@ define(['jquery'], function($){
             event.set("description", desc);
             event.set("location", location);
             event.set("photo", photo);
+            if(category){
+                event.set("category", category);
+            }
             event.setACL(new Parse.ACL(Parse.User.current()));
             event.save(null,{
                 success: deferred.resolve,

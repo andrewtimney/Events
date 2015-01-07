@@ -35,20 +35,21 @@ define(['knockout', 'data/context', 'durandal/app', 'plugins/router'],
             save: function(){
                 this.errors.showAllMessages();
                 if(this.isValid()){
-                datacontext.event.add(
-                    this.title(),
-                    new Date(Date.parse(this.date())),
-                    this.description(),
-                    this.location(),
-                    this.photo()
-                )
-                    .then(function(event){
-                        app.trigger('app:success', 'New Event', 'Yay, a new event was added!');
-                        router.navigate('home');
-                    },
-                    function(error){
-                        app.trigger('app:error', 'Error Occurred', error.message);
-                    })
+                    datacontext.event.add(
+                            this.title(),
+                            moment(this.date(), 'DD/MM/YYYY').toDate(),
+                            this.description(),
+                            this.location(),
+                            this.photo(),
+                            this.selectedCategory()
+                        )
+                        .then(function(event){
+                            app.trigger('app:success', 'New Event', 'Yay, a new event was added!');
+                            router.navigate('home');
+                        },
+                        function(error){
+                            app.trigger('app:error', 'Error Occurred', error.message);
+                        })
                 }
             },
             cancel: function(){
@@ -62,6 +63,9 @@ define(['knockout', 'data/context', 'durandal/app', 'plugins/router'],
                 this.location(null);
                 this.photo(null);
                 this.errors.showAllMessages(false);
+            },
+            deactivate: function(){
+                this.reset();
             }
         };
         ctor.errors = ko.validation.group(ctor);

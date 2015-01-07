@@ -26,7 +26,6 @@
             var currentUser = user.current();
             if(currentUser != null){
                 ctor.username(currentUser.attributes.username);
-                ctor.user = currentUser;
             }
 
             return router.activate();

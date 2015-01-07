@@ -20,7 +20,7 @@ define(['knockout', 'data/context', 'durandal/app', 'plugins/router'],
                         .then(function(user){
                             router.navigate('Home');
                         }, function(user, error){
-                            app.trigger('app:error', 'Error Occurred', error.message);
+                            app.trigger('app:error', 'Login Error', error.message);
                         });
                 }
             }
