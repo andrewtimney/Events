@@ -27,25 +27,33 @@
                     <i class="fa fa-plus"></i> New Event</button>
                 </div>
                 <div class="panel-body">
-
-                    <div data-bind="foreach: events" class="media-list" >
+                    <div>
+                        <input type="text" class="form-control" placeholder="Search" data-bind="textInput: searchCriteria"/>
+                    </div>
+                    <div data-bind="foreach: filteredEvents" class="media-list" >
                         <div class="media eventItem" style="width:300px; display: inline-block">
-                            <a class="pull-left" href="#">
-                                <img class="media-object" src="" alt="" width="64" data-bind="attr: { src: $data.get('photo')}">
-                            </a>
+                            <!--<a class="pull-left" href="#">-->
+                                <!--<img class="media-object" src="" alt="" width="64" data-bind="attr: { src: $data.get('photo')}">-->
+                            <!--</a>-->
                             <div class="media-body">
-                                <h4 class="media-heading" >
+                                <h4 class="media-heading">
                                     <a href="#" data-bind="text: $data.get('title'), attr: { href: '#edit/'+$data.id }"></a>
                                 </h4>
-                                <span data-bind="text: $data.get('location')"></span>
-                                <a href="#" class="btn btn-default btn-sm pull-right"
-                                   data-bind="click: $root.deleteEvent.bind($root)">
-                                    <i class="fa fa-times"></i></a>
+                                <div class="sub-heading">
+                                    <i class="fa fa-map-marker fa-fw"></i>
+                                    <span data-bind="text: $data.get('location')"></span>
+                                </div>
+                                <div class="sub-heading">
+                                    <i class="fa fa-clock-o fa-fw"></i>
+                                    <span data-bind="text: moment($data.get('date')).fromNow()"></span>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
+
     </div>
 </section>

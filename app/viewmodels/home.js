@@ -1,11 +1,23 @@
 define(['knockout', 'data/context', 'plugins/router', 'plugins/dialog', 'viewmodels/addcategory', 'durandal/app'],
     function(ko, datacontext, router, dialog, addcategory, app){
-        return {
-            displayName: 'Home',
-            username: ko.observable(),
-            events: ko.observableArray(),
-            categories: ko.observableArray(),
-            canActivate: function(){
+        var ctor = function() {
+
+            this.displayName = 'Home';
+            this.username = ko.observable();
+            this.events = ko.observableArray();
+            this.categories = ko.observableArray();
+            this.searchCriteria = ko.observable();
+
+            this.filteredEvents = ko.computed(function(){
+                if(this.searchCriteria()){
+                    return ko.utils.arrayFilter(this.events(), function(event){
+                        return event.get('title').toLowerCase().indexOf(this.searchCriteria().toLowerCase()) != -1;
+                    }.bind(this));
+                }
+                return this.events();
+            }, this);
+
+            this.canActivate = function(){
                 var currentUser = datacontext.user.current();
                 if(currentUser != null){
                     this.username(currentUser.attributes.username);
@@ -13,8 +25,9 @@ define(['knockout', 'data/context', 'plugins/router', 'plugins/dialog', 'viewmod
                 }
                 else
                     return false;
-            },
-            activate: function(){
+            };
+
+            this.activate = function(){
                 datacontext.event.getAll()
                     .then(function(events){
                         this.events(events);
@@ -28,18 +41,32 @@ define(['knockout', 'data/context', 'plugins/router', 'plugins/dialog', 'viewmod
                 app.on('app:newcategory').then(function(category){
                    this.categories.push(category)
                 }.bind(this));
-            },
-            addEvent: function(){
+
+            };
+
+            this.addEvent = function(){
                 router.navigate('add');
-            },
-            deleteEvent: function(event){
-                datacontext.event.remove(event)
-                    .then(function(){
-                        this.events.remove(event);
+            };
+
+            this.deleteEvent = function(event){
+
+                app.showMessage('Delete this event?', event.get('title'), ['Yes','No'])
+                    .then(function(dialogResult){
+                        if(dialogResult === 'Yes'){
+                            datacontext.event.remove(event)
+                                .then(function(){
+                                    this.events.remove(event);
+                                }.bind(this));
+                        }
                     }.bind(this));
-            },
-            addCategory: function(){
+
+            };
+
+            this.addCategory = function(){
                 dialog.show(addcategory);
-            }
+            };
+
         };
+        return ctor;
+
     });
