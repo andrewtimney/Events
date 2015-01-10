@@ -1,5 +1,5 @@
-define(['knockout', 'data/context', 'durandal/app', 'plugins/router'],
-    function(ko, datacontext, app, router){
+define(['knockout', 'data/context', 'durandal/app', 'plugins/router', 'plugins/dialog', 'viewmodels/findLocation'],
+    function(ko, datacontext, app, router, dialog, findLocation){
 
         var ctor = {
             title: ko.observable().extend({
@@ -26,12 +26,14 @@ define(['knockout', 'data/context', 'durandal/app', 'plugins/router'],
                     message: 'Category is required',
                     params: true
                 } }),
+
             activate: function(){
               datacontext.category.getAll()
                   .then(function(categories){
                         this.categories(categories);
                   }.bind(this));
             },
+
             save: function(){
                 this.errors.showAllMessages();
                 if(this.isValid()){
@@ -52,10 +54,16 @@ define(['knockout', 'data/context', 'durandal/app', 'plugins/router'],
                         })
                 }
             },
+
+            findLocation: function(){
+                dialog.show(findLocation);
+            },
+
             cancel: function(){
                 this.reset();
                 router.navigate('home');
             },
+
             reset: function(){
                 this.title(null);
                 this.date(null);
@@ -64,9 +72,11 @@ define(['knockout', 'data/context', 'durandal/app', 'plugins/router'],
                 this.photo(null);
                 this.errors.showAllMessages(false);
             },
+
             deactivate: function(){
                 this.reset();
             }
+
         };
         ctor.errors = ko.validation.group(ctor);
         return ctor;

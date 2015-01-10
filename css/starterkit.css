@@ -72,3 +72,9 @@ section {
 .categories .label{
     margin:2px;
 }
+
+#map{
+    width:500px;
+    height:500px;
+    background-color: #040404;
+}

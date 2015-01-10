@@ -7,7 +7,8 @@
         'knockout': '../lib/knockout/knockout-3.2.0',
         'bootstrap': '../lib/bootstrap/js/bootstrap',
         'jquery': '../lib/jquery/jquery-1.9.1',
-        'knockout-validation': '../lib/knockout/knockout.validation'
+        'knockout-validation': '../lib/knockout/knockout.validation',
+        'OSMGeocoder': '../lib/Control.OSMGeocoder'
     },
     shim: {
         'bootstrap': {
@@ -17,6 +18,9 @@
         'knockout-validation':{
             deps: ['knockout'],
             exports: 'ko'
+        },
+        'OSMGeocoder':{
+            exports: 'L'
         }
     }
 });

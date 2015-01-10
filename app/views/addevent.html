@@ -32,8 +32,14 @@
                 <label class="control-label col-sm-4" for="Location">Location</label>
 
                 <div class="col-sm-8">
-                    <input type="text" id="Location" class="form-control" name="Location" required
-                           data-bind="value: location"/>
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <a class="" href="#" data-bind="click: findLocation">Find</a>
+                        </div>
+                        <input type="text" id="Location" class="form-control" name="Location" required
+                            data-bind="value: location"/>
+                    </div>
+
                 </div>
             </div>
         </div>
