@@ -1,15 +1,19 @@
-define(['services/map', 'knockout', 'plugins/dialog'],
-    function(map, ko, dialog){
+define(['services/map', 'knockout', 'plugins/dialog', 'services/geocoding'],
+    function(map, ko, dialog, geocoder){
 
-        var ctor = {
+        var ctor = function(){
 
-            mapObj: null,
-            marker: ko.observable(),
+            this.mapObj = null;
+            this.marker = ko.observable();
+            this.displayLocation = ko.observable();
 
-            activate: function(){
-            },
+            this.activate = function(){
+                if(this.marker()){
+                    this.marker().addTo(this.mapObj);
+                }
+            };
 
-            compositionComplete: function(){
+            this.compositionComplete = function(){
                 this.mapObj = map.load('map', null, { callback: this.geocoderCallback });
                 this.mapObj.on('contextmenu', function(result){
                     if(this.marker()){
@@ -17,21 +21,27 @@ define(['services/map', 'knockout', 'plugins/dialog'],
                     }
                     this.marker(L.marker(result.latlng).addTo(this.mapObj));
                 }.bind(this));
-            },
+            };
 
-            geocoderCallback: function(){
-                console.log('geo');
-            },
-
-            save: function(){
-
-            },
-
-            cancel: function(){
+            this.save = function(){
                 dialog.close(this);
-            }
+                if(this.marker()) {
+                    var latlng = this.marker().getLatLng();
+                    geocoder.reverse(latlng.lat, latlng.lng)
+                        .then(function(result){
+                            if(result['display_name']) {
+                                this.displayLocation(result.display_name);
+                            }
+                        }.bind(this));
+                }
+            };
+
+            this.cancel = function(){
+                dialog.close(this);
+            };
 
         };
+
         return ctor;
 
     });

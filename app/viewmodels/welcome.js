@@ -16,9 +16,6 @@
             'Make jQuery & Bootstrap widgets templatable and bindable (or build your own widgets).'
         ];
         this.activate = function(){
-            if(user.current()){
-                router.navigate('Home');
-            }
         }
     };
 

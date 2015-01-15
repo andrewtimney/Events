@@ -1,15 +1,21 @@
 define(['jquery'], function($){
 
     return {
-        add: function(title, date, desc, location, photo, category){
+
+        add: function(title, date, desc, location, photo, category, location){
             var deferred = $.Deferred();
             var Event = Parse.Object.extend("Event");
             var event = new Event();
             event.set("title", title);
             event.set("date", date);
             event.set("description", desc);
-            event.set("location", location);
             event.set("photo", photo);
+
+            if(location) {
+                var point = new Parse.GeoPoint({latitude: location.lat, longitude: location.lng});
+                event.set("location", point);
+            }
+            console.log(location);
             if(category){
                 event.set("category", category);
             }
@@ -20,6 +26,7 @@ define(['jquery'], function($){
             });
             return deferred.promise();
         },
+
         edit: function(event){
             var deferred = $.Deferred();
             event.save(null, {
@@ -28,6 +35,7 @@ define(['jquery'], function($){
             });
             return deferred.promise();
         },
+
         getAll: function(){
             var deferred = $.Deferred();
             var Event = Parse.Object.extend("Event");
@@ -38,6 +46,7 @@ define(['jquery'], function($){
             });
             return deferred.promise();
         },
+
         remove: function(event){
             var deferred = $.Deferred();
             event.destroy({
@@ -46,6 +55,7 @@ define(['jquery'], function($){
             });
             return deferred.promise();
         },
+
         get: function(id){
             var deferred = $.Deferred();
             var Event = Parse.Object.extend("Event");

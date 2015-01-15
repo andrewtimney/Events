@@ -29,17 +29,13 @@
 
             </div>
             <div class="form-group">
-                <label class="control-label col-sm-4" for="Location">Location</label>
+                <label class="control-label col-sm-4" >Location</label>
 
-                <div class="col-sm-8">
-                    <div class="input-group">
-                        <div class="input-group-addon">
-                            <a class="" href="#" data-bind="click: findLocation">Find</a>
-                        </div>
-                        <input type="text" id="Location" class="form-control" name="Location" required
-                            data-bind="value: location"/>
+                <div class="col-md-8">
+                    <div class="panel pull-right" data-bind="css: { 'panel-info': displayLocation() ? displayLocation().length > 0 : false }">
+                        <div class="panel-body" data-bind="text: displayLocation"></div>
                     </div>
-
+                    <button class="btn btn-info" data-bind="click: findLocation, text: displayLocation() ? 'Change' : 'Find'"></button>
                 </div>
             </div>
         </div>

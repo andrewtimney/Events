@@ -1,6 +1,7 @@
 define(['knockout', 'data/context', 'durandal/app', 'plugins/router', 'plugins/dialog', 'viewmodels/findLocation'],
-    function(ko, datacontext, app, router, dialog, findLocation){
+    function(ko, datacontext, app, router, dialog, FindLocation){
 
+        var findLocation = new FindLocation();
         var ctor = {
             title: ko.observable().extend({
                 required: {
@@ -18,10 +19,11 @@ define(['knockout', 'data/context', 'durandal/app', 'plugins/router', 'plugins/d
                     message: 'Description is required',
                     params: true
                 } }),
-            location: ko.observable(),
+            location: findLocation.marker,
+            displayLocation: findLocation.displayLocation,
             photo: ko.observable(),
             categories: ko.observableArray(),
-            selectedCategory: ko.observableArray().extend({
+            selectedCategory: ko.observable().extend({
                 required: {
                     message: 'Category is required',
                     params: true
@@ -29,9 +31,11 @@ define(['knockout', 'data/context', 'durandal/app', 'plugins/router', 'plugins/d
 
             activate: function(){
               datacontext.category.getAll()
-                  .then(function(categories){
-                        this.categories(categories);
-                  }.bind(this));
+                  .then(this.loadCategories.bind(this));
+            },
+
+            loadCategories: function(categories){
+                this.categories(categories);
             },
 
             save: function(){
@@ -41,9 +45,9 @@ define(['knockout', 'data/context', 'durandal/app', 'plugins/router', 'plugins/d
                             this.title(),
                             moment(this.date(), 'DD/MM/YYYY').toDate(),
                             this.description(),
-                            this.location(),
                             this.photo(),
-                            this.selectedCategory()
+                            this.selectedCategory(),
+                            this.location() ? this.location().getLatLng() : null
                         )
                         .then(function(event){
                             app.trigger('app:success', 'New Event', 'Yay, a new event was added!');
