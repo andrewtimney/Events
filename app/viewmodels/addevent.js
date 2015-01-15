@@ -28,6 +28,7 @@ define(['knockout', 'data/context', 'durandal/app', 'plugins/router', 'plugins/d
                     message: 'Category is required',
                     params: true
                 } }),
+            findingAddress: findLocation.findingAddress,
 
             activate: function(){
               datacontext.category.getAll()

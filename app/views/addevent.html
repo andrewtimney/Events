@@ -3,31 +3,32 @@
 
     <form action="" class="form-horizontal" data-bind="submit: save" novalidate>
         <div class="col-sm-6">
+
             <div class="form-group">
                 <label class="control-label col-sm-4" for="Title">Title</label>
-
                 <div class="col-sm-8">
                     <input type="text" name="Title" id="Title" class="form-control" required data-bind="value: title"/>
                 </div>
 
             </div>
+
             <div class="form-group">
                 <label class="control-label col-sm-4" for="Date">Date</label>
-
                 <div class="col-sm-8">
                     <input type="text" name="Date" id="Date" class="form-control" required data-bind="value: date"/>
                 </div>
 
             </div>
+
             <div class="form-group">
                 <label class="control-label col-sm-4" for="Description">Description</label>
-
                 <div class="col-sm-8">
                 <textarea name="Description" id="Description" cols="30" rows="10" class="form-control" required
                           data-bind="value: description"></textarea>
                 </div>
 
             </div>
+
             <div class="form-group">
                 <label class="control-label col-sm-4" >Location</label>
 
@@ -36,10 +37,13 @@
                         <div class="panel-body" data-bind="text: displayLocation"></div>
                     </div>
                     <button class="btn btn-info" data-bind="click: findLocation, text: displayLocation() ? 'Change' : 'Find'"></button>
+                    <div class="btn btn-primary" data-bind="visible: findingAddress"><i class="fa fa-spinner fa-spin" title="Finding address"></i> Finding Address</div>
                 </div>
             </div>
+
         </div>
         <div class="col-sm-6">
+
             <div class="form-group">
                 <label class="control-label col-sm-4" for="Category">Category</label>
                 <div class="col-sm-8">
@@ -48,6 +52,7 @@
                     </select>
                 </div>
             </div>
+
             <div class="form-group">
                 <label class="control-label col-sm-4" for="Photo">Photo</label>
 
@@ -55,6 +60,7 @@
                     <input type="text" id="Photo" class="form-control" name="Photo" required data-bind="value: photo"/>
                 </div>
             </div>
+
             <div class="form-group">
                 <div class="col-sm-8 col-sm-offset-4">
                     <img src=""

@@ -6,6 +6,7 @@ define(['services/map', 'knockout', 'plugins/dialog', 'services/geocoding'],
             this.mapObj = null;
             this.marker = ko.observable();
             this.displayLocation = ko.observable();
+            this.findingAddress = ko.observable(false),
 
             this.activate = function(){
                 if(this.marker()){
@@ -26,12 +27,14 @@ define(['services/map', 'knockout', 'plugins/dialog', 'services/geocoding'],
             this.save = function(){
                 dialog.close(this);
                 if(this.marker()) {
+                    this.findingAddress(true);
                     var latlng = this.marker().getLatLng();
                     geocoder.reverse(latlng.lat, latlng.lng)
                         .then(function(result){
                             if(result['display_name']) {
                                 this.displayLocation(result.display_name);
                             }
+                            this.findingAddress(false);
                         }.bind(this));
                 }
             };
