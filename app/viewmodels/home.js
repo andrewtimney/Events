@@ -7,6 +7,7 @@ define(['knockout', 'data/context', 'plugins/router', 'plugins/dialog', 'viewmod
             this.events = ko.observableArray();
             this.categories = ko.observableArray();
             this.searchCriteria = ko.observable();
+            this.categoryFilter = ko.observable();
 
             this.filteredEvents = ko.computed(function(){
                 if(this.searchCriteria()){
@@ -16,6 +17,15 @@ define(['knockout', 'data/context', 'plugins/router', 'plugins/dialog', 'viewmod
                 }
                 return this.events();
             }, this);
+
+            this.filterByCategory = function(category){
+                this.categoryFilter(category);
+            }.bind(this);
+
+            this.selectedCategory = ko.computed(function(){
+
+            });
+
 
             this.canActivate = function(){
                 var currentUser = datacontext.user.current();

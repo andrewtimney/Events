@@ -2,7 +2,7 @@ define(['jquery'], function($){
 
     return {
 
-        add: function(title, date, desc, location, photo, category, location){
+        add: function(title, date, desc, photo, category, location){
             var deferred = $.Deferred();
             var Event = Parse.Object.extend("Event");
             var event = new Event();

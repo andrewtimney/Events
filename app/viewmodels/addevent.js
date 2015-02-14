@@ -65,7 +65,6 @@ define(['knockout', 'data/context', 'durandal/app', 'plugins/router', 'plugins/d
             },
 
             cancel: function(){
-                this.reset();
                 router.navigate('home');
             },
 
