@@ -1,87 +1,115 @@
-define(['knockout', 'data/context', 'durandal/app', 'plugins/router', 'plugins/dialog', 'viewmodels/findLocation'],
-    function(ko, datacontext, app, router, dialog, FindLocation){
+define(['knockout', 'data/context', 'durandal/app', 'plugins/router', 'plugins/dialog', 'viewmodels/findLocation',
+        'viewmodels/baseevent'],
+    function (ko, datacontext, app, router, dialog, FindLocation, baseevent) {
 
         var findLocation = new FindLocation();
-        var ctor = {
-            title: ko.observable().extend({
-                required: {
-                    message: 'Title is required',
-                    params: true
-                } }),
-            date: ko.observable().extend({
-                date: true,
-                required: {
-                    message: 'Date is required',
-                    params: true
-                }}),
-            description: ko.observable().extend({
-                required: {
-                    message: 'Description is required',
-                    params: true
-                } }),
-            location: findLocation.marker,
-            displayLocation: findLocation.displayLocation,
-            photo: ko.observable(),
-            categories: ko.observableArray(),
-            selectedCategory: ko.observable().extend({
-                required: {
-                    message: 'Category is required',
-                    params: true
-                } }),
-            findingAddress: findLocation.findingAddress,
 
-            activate: function(){
-              datacontext.category.getAll()
-                  .then(this.loadCategories.bind(this));
-            },
-
-            loadCategories: function(categories){
+        function ctorFun() {
+            this.activate = function () {
+                datacontext.category.getAll()
+                    .then(this.loadCategories.bind(this));
+            };
+            this.loadCategories = function (categories) {
                 this.categories(categories);
-            },
-
-            save: function(){
+            };
+            this.save = function () {
+                console.log(this);
                 this.errors.showAllMessages();
-                if(this.isValid()){
+                if (this.isValid()) {
                     datacontext.event.add(
-                            this.title(),
-                            moment(this.date(), 'DD/MM/YYYY').toDate(),
-                            this.description(),
-                            this.photo(),
-                            this.selectedCategory(),
-                            this.location() ? this.location().getLatLng() : null
-                        )
-                        .then(function(event){
+                        this.title(),
+                        moment(this.date(), 'DD/MM/YYYY').toDate(),
+                        this.description(),
+                        this.photo(),
+                        this.selectedCategory(),
+                        this.location() ? this.location().getLatLng() : null
+                    )
+                        .then(function (event) {
                             app.trigger('app:success', 'New Event', 'Yay, a new event was added!');
                             router.navigate('home');
                         },
-                        function(error){
+                        function (error) {
                             app.trigger('app:error', 'Error Occurred', error.message);
                         })
                 }
-            },
-
-            findLocation: function(){
+            };
+            this.findLocation = function () {
                 dialog.show(findLocation);
-            },
-
-            cancel: function(){
+            };
+            this.cancel = function () {
                 router.navigate('home');
-            },
-
-            reset: function(){
+            };
+            this.reset = function () {
                 this.title(null);
                 this.date(null);
                 this.description(null);
                 this.location(null);
                 this.photo(null);
                 this.errors.showAllMessages(false);
-            },
-
-            deactivate: function(){
+            };
+            this.deactivate = function () {
                 this.reset();
-            }
-
+            };
+            this.errors = ko.validation.group(this);
         };
-        ctor.errors = ko.validation.group(ctor);
-        return ctor;
+        ctorFun.prototype = new baseevent();
+
+        return ctorFun;
+
+        //var ctor = {
+        //
+        //    activate: function () {
+        //        datacontext.category.getAll()
+        //            .then(this.loadCategories.bind(this));
+        //    },
+        //
+        //    loadCategories: function (categories) {
+        //        this.categories(categories);
+        //    },
+        //
+        //    save: function () {
+        //        this.errors.showAllMessages();
+        //        if (this.isValid()) {
+        //            datacontext.event.add(
+        //                this.title(),
+        //                moment(this.date(), 'DD/MM/YYYY').toDate(),
+        //                this.description(),
+        //                this.photo(),
+        //                this.selectedCategory(),
+        //                this.location() ? this.location().getLatLng() : null
+        //            )
+        //                .then(function (event) {
+        //                    app.trigger('app:success', 'New Event', 'Yay, a new event was added!');
+        //                    router.navigate('home');
+        //                },
+        //                function (error) {
+        //                    app.trigger('app:error', 'Error Occurred', error.message);
+        //                })
+        //        }
+        //    },
+        //
+        //    findLocation: function () {
+        //        dialog.show(findLocation);
+        //    },
+        //
+        //    cancel: function () {
+        //        router.navigate('home');
+        //    },
+        //
+        //    reset: function () {
+        //        this.title(null);
+        //        this.date(null);
+        //        this.description(null);
+        //        this.location(null);
+        //        this.photo(null);
+        //        this.errors.showAllMessages(false);
+        //    },
+        //
+        //    deactivate: function () {
+        //        this.reset();
+        //    }
+        //
+        //};
+        //ctor.errors = ko.validation.group(ctor);
+        //return ctor;
     });
