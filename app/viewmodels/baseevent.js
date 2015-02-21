@@ -40,6 +40,17 @@ define(['knockout', 'viewmodels/findLocation', 'plugins/dialog',  'plugins/route
             this.cancel = function () {
                 router.navigate('home');
             };
+            this.deactivate = function () {
+                //this.reset();
+            };
+            this.reset = function () {
+                this.title(null);
+                this.date(null);
+                this.description(null);
+                this.location(null);
+                this.photo(null);
+                this.errors.showAllMessages(false);
+            };
         };
 
     });

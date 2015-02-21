@@ -5,6 +5,7 @@ define(['knockout', 'data/context', 'durandal/app', 'plugins/router', 'plugins/d
         var findLocation = new FindLocation();
 
         function ctorFun() {
+
             this.activate = function () {
                 datacontext.category.getAll()
                     .then(this.loadCategories.bind(this));
@@ -13,10 +14,6 @@ define(['knockout', 'data/context', 'durandal/app', 'plugins/router', 'plugins/d
                 this.categories(categories);
             };
             this.save = function () {
-                this.errors = ko.validation.group(this);
-                console.log(this.errors);
-                this.errors.showAllMessages();
-                return;
                 this.errors.showAllMessages();
                 if (this.isValid()) {
                     datacontext.event.add(
@@ -36,21 +33,10 @@ define(['knockout', 'data/context', 'durandal/app', 'plugins/router', 'plugins/d
                         })
                 }
             };
-
-            this.reset = function () {
-                this.title(null);
-                this.date(null);
-                this.description(null);
-                this.location(null);
-                this.photo(null);
-                this.errors.showAllMessages(false);
-            };
-            this.deactivate = function () {
-                this.reset();
-            };
         };
 
         var obj = new ctorFun();
+        obj.errors = ko.validation.group(obj);
         ko.utils.extend(obj, new baseevent());
 
         return obj;

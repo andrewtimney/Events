@@ -51,21 +51,6 @@ define(['knockout', 'data/context', 'durandal/app', 'plugins/router', 'viewmodel
                             router.navigate('home');
                         });
                 }
-            },
-            cancel: function(){
-                this.reset();
-                router.navigate('home');
-            },
-            reset: function(){
-                this.title(null);
-                this.date(null);
-                this.description(null);
-                this.location(null);
-                this.photo(null);
-                this.errors.showAllMessages(false);
-            },
-            deactivate: function(){
-                this.reset();
             }
         };
         ctor.errors = ko.validation.group(ctor);
