@@ -1,33 +1,9 @@
-define(['knockout', 'data/context', 'durandal/app', 'plugins/router'],
-    function(ko, datacontext, app, router){
+define(['knockout', 'data/context', 'durandal/app', 'plugins/router', 'viewmodels/baseevent'],
+    function(ko, datacontext, app, router, baseevent){
 
         var ctor = {
             viewUrl: 'views/addevent',
-            title: ko.observable().extend({
-                required: {
-                    message: 'Title is required',
-                    params: true
-                } }),
-            date: ko.observable().extend({
-                date: true,
-                required: {
-                    message: 'Date is required',
-                    params: true
-                }}),
-            description: ko.observable().extend({
-                required: {
-                    message: 'Description is required',
-                    params: true
-                } }),
-            location: ko.observable(),
-            photo: ko.observable(),
             event: null,
-            categories: ko.observableArray(),
-            selectedCategory: ko.observable().extend({
-                required: {
-                    message: 'Category is required',
-                    params: true
-                } }),
             activate: function(id){
                 datacontext.category.getAll()
                     .then(function(categories){
@@ -93,5 +69,7 @@ define(['knockout', 'data/context', 'durandal/app', 'plugins/router'],
             }
         };
         ctor.errors = ko.validation.group(ctor);
+        ko.utils.extend(ctor, new baseevent());
+
         return ctor;
     });

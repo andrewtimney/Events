@@ -36,7 +36,7 @@
                     <div class="panel pull-right" data-bind="css: { 'panel-info': displayLocation() ? displayLocation().length > 0 : false }">
                         <div class="panel-body" data-bind="text: displayLocation"></div>
                     </div>
-                    <button class="btn btn-info" data-bind="click: findLocation, text: displayLocation() ? 'Change' : 'Find'"></button>
+                    <button class="btn btn-info" data-bind="click: findLocationDialog, text: displayLocation() ? 'Change' : 'Find'"></button>
                     <div class="btn btn-primary" data-bind="visible: findingAddress"><i class="fa fa-spinner fa-spin" title="Finding address"></i> Finding Address</div>
                 </div>
             </div>
