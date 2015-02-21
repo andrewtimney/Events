@@ -24,7 +24,7 @@ define(['knockout', 'viewmodels/findLocation', 'plugins/dialog',  'plugins/route
                 }
             });
             this.location = findLocation.marker;
-            this.displayLocation = findLocation.displayLocation;
+            this.displayLocation = ko.observable();// findLocation.displayLocation;
             this.photo = ko.observable();
             this.categories = ko.observableArray(),
             this.selectedCategory = ko.observable().extend({
@@ -33,14 +33,15 @@ define(['knockout', 'viewmodels/findLocation', 'plugins/dialog',  'plugins/route
                     params: true
                 }
             });
-            this.findingAddress = ko.observable(false),//findLocation.findingAddress;
+            this.findingAddress = ko.observable(false);
             this.findLocationDialog = function () {
                 dialog.show(findLocation);
             };
             this.cancel = function () {
                 router.navigate('home');
             };
-            this.deactivate = function () {
+            this.detached = function(){
+              this.reset();
             };
             this.reset = function () {
                 this.title(null);
@@ -48,6 +49,8 @@ define(['knockout', 'viewmodels/findLocation', 'plugins/dialog',  'plugins/route
                 this.description(null);
                 this.location(null);
                 this.photo(null);
+                this.findingAddress(false);
+                this.displayLocation(null);
                 this.errors.showAllMessages(false);
             };
         };

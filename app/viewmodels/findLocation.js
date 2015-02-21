@@ -6,7 +6,6 @@ define(['services/map', 'knockout', 'plugins/dialog', 'services/geocoding'],
             this.mapObj = null;
             this.marker = ko.observable();
             this.displayLocation = ko.observable();
-            this.findingAddress = ko.observable(false),
 
             this.activate = function(){
                 if(this.marker()){

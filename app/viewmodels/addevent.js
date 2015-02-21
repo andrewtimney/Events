@@ -14,6 +14,7 @@ define(['knockout', 'data/context', 'durandal/app', 'plugins/router', 'plugins/d
                 this.categories(categories);
             };
             this.save = function () {
+                this.errors = ko.validation.group(this);
                 this.errors.showAllMessages();
                 if (this.isValid()) {
                     datacontext.event.add(
@@ -24,19 +25,19 @@ define(['knockout', 'data/context', 'durandal/app', 'plugins/router', 'plugins/d
                         this.selectedCategory(),
                         this.location() ? this.location().getLatLng() : null
                     )
-                        .then(function (event) {
-                            app.trigger('app:success', 'New Event', 'Yay, a new event was added!');
-                            router.navigate('home');
-                        },
-                        function (error) {
-                            app.trigger('app:error', 'Error Occurred', error.message);
-                        })
+                    .then(function (event) {
+                        app.trigger('app:success', 'New Event', 'Yay, a new event was added!');
+                        router.navigate('home');
+                    },
+                    function (error) {
+                        app.trigger('app:error', 'Error Occurred', error.message);
+                    })
                 }
             };
         };
 
         var obj = new ctorFun();
-        obj.errors = ko.validation.group(obj);
+
         ko.utils.extend(obj, new baseevent());
 
         return obj;

@@ -47,6 +47,7 @@ define(['knockout', 'data/context', 'durandal/app', 'plugins/router', 'viewmodel
                     });
             },
             save: function(){
+                this.errors = ko.validation.group(this);
                 this.errors.showAllMessages();
                 if(this.isValid()) {
                     this.event.set('title', this.title());
