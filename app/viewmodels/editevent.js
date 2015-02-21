@@ -1,5 +1,5 @@
-define(['knockout', 'data/context', 'durandal/app', 'plugins/router', 'viewmodels/baseevent'],
-    function(ko, datacontext, app, router, baseevent){
+define(['knockout', 'data/context', 'durandal/app', 'plugins/router', 'viewmodels/baseevent', 'services/geocoding'],
+    function(ko, datacontext, app, router, baseevent, geocoder){
 
         var ctor = {
             viewUrl: 'views/addevent',
@@ -31,6 +31,16 @@ define(['knockout', 'data/context', 'durandal/app', 'plugins/router', 'viewmodel
                             });
                         }
                         this.date(moment(event.get('date')).format("DD/MM/YYYY"));
+                        if(this.location()){
+                            this.findingAddress(true);
+                            geocoder.reverse(this.location().latitude, this.location().longitude)
+                                .then(function(result){
+                                    if(result['display_name']) {
+                                        this.displayLocation(result.display_name);
+                                    }
+                                    this.findingAddress(false);
+                                }.bind(this));
+                        }
                     }.bind(this),
                     function(obj, error){
                         app.trigger('app:error', 'Error Occurred', error.message);

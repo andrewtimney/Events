@@ -1,5 +1,5 @@
-define(['knockout', 'viewmodels/findLocation', 'plugins/dialog',  'plugins/router'],
-    function (ko, FindLocation, dialog, router) {
+define(['knockout', 'viewmodels/findLocation', 'plugins/dialog',  'plugins/router', 'services/geocoding'],
+    function (ko, FindLocation, dialog, router, geocoder) {
 
         var findLocation = new FindLocation();
 
@@ -33,7 +33,7 @@ define(['knockout', 'viewmodels/findLocation', 'plugins/dialog',  'plugins/route
                     params: true
                 }
             });
-            this.findingAddress = findLocation.findingAddress;
+            this.findingAddress = ko.observable(false),//findLocation.findingAddress;
             this.findLocationDialog = function () {
                 dialog.show(findLocation);
             };
@@ -41,7 +41,6 @@ define(['knockout', 'viewmodels/findLocation', 'plugins/dialog',  'plugins/route
                 router.navigate('home');
             };
             this.deactivate = function () {
-                //this.reset();
             };
             this.reset = function () {
                 this.title(null);
