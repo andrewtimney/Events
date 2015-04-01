@@ -21,7 +21,7 @@ define(['knockout', 'data/context', 'durandal/app', 'plugins/router'],
             } }),
             signup: function(){
                 this.errors.showAllMessages();
-                if(this.isValid()){
+                if(this.errors().length > 0)){
                     datacontext.user.add(this.username(), this.email(), this.password())
                         .then(function(){
                             app.trigger('app:success', 'New User', 'You have registered successfully, you can now login');

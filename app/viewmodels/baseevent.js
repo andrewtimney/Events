@@ -51,6 +51,8 @@ define(['knockout', 'viewmodels/findLocation', 'plugins/dialog',  'plugins/route
                 this.photo(null);
                 this.findingAddress(false);
                 this.displayLocation(null);
+                //this.errors.showAllMessages(false);
+                this.errors = ko.validation.group(this);
                 this.errors.showAllMessages(false);
             };
         };

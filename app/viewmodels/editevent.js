@@ -49,7 +49,7 @@ define(['knockout', 'data/context', 'durandal/app', 'plugins/router', 'viewmodel
             save: function(){
                 this.errors = ko.validation.group(this);
                 this.errors.showAllMessages();
-                if(this.isValid()) {
+                if(this.errors().length <= 0) {
                     this.event.set('title', this.title());
                     this.event.set('date', moment(this.date(), 'DD/MM/YYYY').toDate());
                     this.event.set('description', this.description());

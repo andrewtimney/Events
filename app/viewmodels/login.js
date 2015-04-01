@@ -15,7 +15,7 @@ define(['knockout', 'data/context', 'durandal/app', 'plugins/router'],
                 } }),
             login: function(){
                 this.errors.showAllMessages();
-                if(this.isValid()){
+                if(this.errors().length > 0){
                     datacontext.user.login(this.username(), this.password())
                         .then(function(user){
                             router.navigate('Home');

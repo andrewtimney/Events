@@ -16,7 +16,7 @@ define(['knockout', 'data/context', 'durandal/app', 'plugins/router', 'plugins/d
             this.save = function () {
                 this.errors = ko.validation.group(this);
                 this.errors.showAllMessages();
-                if (this.isValid()) {
+                if (this.errors().length <= 0) {
                     datacontext.event.add(
                         this.title(),
                         moment(this.date(), 'DD/MM/YYYY').toDate(),
