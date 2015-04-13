@@ -8,9 +8,8 @@ define(['services/map', 'knockout', 'plugins/dialog', 'services/geocoding'],
             this.displayLocation = ko.observable();
 
             this.activate = function(){
-                if(this.marker()){
-                    this.marker().addTo(this.mapObj);
-                }
+                console.log('ss', this.mapObj);
+
             };
 
             this.compositionComplete = function(){
@@ -21,6 +20,9 @@ define(['services/map', 'knockout', 'plugins/dialog', 'services/geocoding'],
                     }
                     this.marker(L.marker(result.latlng).addTo(this.mapObj));
                 }.bind(this));
+                if(this.marker()){
+                    this.marker().addTo(this.mapObj);
+                }
             };
 
             this.save = function(){
