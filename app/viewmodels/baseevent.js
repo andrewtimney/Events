@@ -2,6 +2,8 @@ define(['knockout', 'viewmodels/findLocation', 'plugins/dialog',  'plugins/route
     function (ko, FindLocation, dialog, router, geocoder) {
 
         var findLocation = new FindLocation();
+        var findingAddress = ko.observable(false);
+        findLocation.findingAddress = findingAddress;
 
         return function () {
             this.title = ko.observable().extend({
@@ -24,7 +26,7 @@ define(['knockout', 'viewmodels/findLocation', 'plugins/dialog',  'plugins/route
                 }
             });
             this.location = findLocation.marker;
-            this.displayLocation = ko.observable();// findLocation.displayLocation;
+            this.displayLocation = findLocation.displayLocation;
             this.photo = ko.observable();
             this.categories = ko.observableArray(),
             this.selectedCategory = ko.observable().extend({
@@ -33,7 +35,7 @@ define(['knockout', 'viewmodels/findLocation', 'plugins/dialog',  'plugins/route
                     params: true
                 }
             });
-            this.findingAddress = ko.observable(false);
+            this.findingAddress = findingAddress;
             this.findLocationDialog = function () {
                 dialog.show(findLocation);
             };

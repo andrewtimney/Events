@@ -52,8 +52,13 @@ define(['knockout', 'data/context', 'durandal/app', 'plugins/router', 'viewmodel
                 if(this.errors().length <= 0) {
                     this.event.set('title', this.title());
                     this.event.set('date', moment(this.date(), 'DD/MM/YYYY').toDate());
+                   
                     this.event.set('description', this.description());
-                    this.event.set('location', this.location());
+                     if(this.location()) {
+                        var latlng = this.location().getLatLng();
+                        var point = new Parse.GeoPoint({latitude: latlng.lat, longitude: latlng.lng});
+                        this.event.set("location", point);
+                    }
                     this.event.set('photo', this.photo());
                     this.event.set('category', this.selectedCategory());
                     datacontext.event.edit(this.event)

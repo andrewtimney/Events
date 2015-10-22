@@ -1,0 +1,19 @@
+{
+  "name": "myevents",
+  "version": "1.0.0",
+  "description": "This site allows you to add events.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andrewtimney/Events.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/andrewtimney/Events/issues"
+  },
+  "homepage": "https://github.com/andrewtimney/Events#readme"
+}

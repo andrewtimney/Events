@@ -31,7 +31,7 @@ define(['durandal/system', 'durandal/app', 'durandal/viewLocator', 'knockout-val
     system.debug(true);
     //>>excludeEnd("build");
 
-    app.title = 'Durandal Starter Kit';
+    app.title = 'Events';
 
     app.configurePlugins({
         router:true,

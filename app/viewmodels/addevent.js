@@ -37,7 +37,6 @@ define(['knockout', 'data/context', 'durandal/app', 'plugins/router', 'plugins/d
         };
 
         var obj = new ctorFun();
-
         ko.utils.extend(obj, new baseevent());
 
         return obj;

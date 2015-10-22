@@ -9,33 +9,34 @@ define(['services/map', 'knockout', 'plugins/dialog', 'services/geocoding'],
 
             this.activate = function(){
                 console.log('ss', this.mapObj);
-
             };
 
             this.compositionComplete = function(){
                 this.mapObj = map.load('map', null, { callback: this.geocoderCallback });
                 this.mapObj.on('contextmenu', function(result){
-                    if(this.marker()){
-                        this.mapObj.removeLayer(this.marker());
+                    try{
+                        if(this.marker()){
+                            this.mapObj.removeLayer(this.marker());
+                        }
+                    }catch(er){
+                        // Do nothing
                     }
                     this.marker(L.marker(result.latlng).addTo(this.mapObj));
                 }.bind(this));
-                if(this.marker()){
-                    this.marker().addTo(this.mapObj);
-                }
             };
 
             this.save = function(){
                 dialog.close(this);
                 if(this.marker()) {
-                    this.findingAddress(true);
+                    this.setFindingAddress(true);
                     var latlng = this.marker().getLatLng();
                     geocoder.reverse(latlng.lat, latlng.lng)
                         .then(function(result){
                             if(result['display_name']) {
                                 this.displayLocation(result.display_name);
                             }
-                            this.findingAddress(false);
+                            console.log('Address',result);
+                            this.setFindingAddress(false);
                         }.bind(this));
                 }
             };
@@ -43,6 +44,12 @@ define(['services/map', 'knockout', 'plugins/dialog', 'services/geocoding'],
             this.cancel = function(){
                 dialog.close(this);
             };
+            
+            this.setFindingAddress = function(value){
+                if(this.findingAddress){
+                    this.findingAddress(value);
+                }
+            }
 
         };
 
