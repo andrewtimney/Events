@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/andrewtimney/Events/issues"
   },
-  "homepage": "https://github.com/andrewtimney/Events#readme"
+  "homepage": "https://github.com/andrewtimney/Events#readme",
+  "dependencies": {
+    "http-server": "^0.8.5"
+  }
 }
