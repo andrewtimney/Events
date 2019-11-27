@@ -18,6 +18,6 @@
   },
   "homepage": "https://github.com/andrewtimney/Events#readme",
   "dependencies": {
-    "http-server": "^0.8.5"
+    "http-server": "^0.12.0"
   }
 }
